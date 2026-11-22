@@ -80,3 +80,30 @@
 .add-to-cart:hover {
   background: #e9950b;
 }
+
+.product-discount,
+.product-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.product-discount {
+  color: #e67e22;
+  font-weight: bold;
+}
+
+.in-stock {
+  color: #168a45;
+}
+
+.out-of-stock {
+  color: #d63031;
+}
+
+.add-to-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

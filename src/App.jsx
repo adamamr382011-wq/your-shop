@@ -3,14 +3,26 @@ import { PropagateLoader } from "react-spinners";
 import ProductCard from "./ProductCard";
 import "./App.css";
 
+const categories = [
+  "all",
+  "laptops",
+  "vehicle",
+  "fragrances",
+];
+
+
 function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  // حالة الكتابة وحالة البحث المعتمد
+  //البحث
   const [searchQuery, setSearchQuery] = useState("");
   const [submitQuery, setSubmitQuery] = useState("");
+
+  //categories
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
 
   // اعتماد البحث عند الضغط على الزر
   function handleSearch(e) {
@@ -18,12 +30,31 @@ function App() {
     setSubmitQuery(searchQuery.trim());
   }
 
+  //category selection function
+  function handlecategory(category) {
+
+    setSelectedCategory(category);
+    setSearchQuery('');
+    setSubmitQuery('');
+  }
+
   useEffect(() => {
     setLoading(true);
     setError("");
 
+    let url = `https://dummyjson.com/products`;
+
+    if (submitQuery) {
+
+      url = `https://dummyjson.com/products/search?q=${submitQuery}`;
+
+    } else if (selectedCategory !== "all") {
+
+      url = `https://dummyjson.com/products/category/${selectedCategory}`;
+    }
+
     fetch(
-      `https://dummyjson.com/products/search?q=${encodeURIComponent(submitQuery)}&limit=20`
+      url
     )
       .then((response) => {
         if (!response.ok) {
@@ -41,7 +72,7 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-  }, [submitQuery]);
+  }, [submitQuery, selectedCategory]);
 
   return (
     <div className="store">
@@ -61,7 +92,22 @@ function App() {
             Search
           </button>
         </form>
+
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className="cat-btn"
+            onClick={() => handlecategory(cat)}
+          >
+            {cat.toUpperCase()}
+          </button>
+        ))}
+
       </header>
+     
+      <p className="card-num">
+        Number of products: <strong>{products.length}</strong>
+      </p>
 
       <main>
         {loading && (
@@ -85,6 +131,8 @@ function App() {
                 title={product.title}
                 price={product.price}
                 rating={product.rating}
+                discount={product.discountPercentage}
+                availability={product.availabilityStatus}
               />
             ))}
         </div>

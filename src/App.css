@@ -133,12 +133,67 @@ body {
 }
 
 .search-btn {
+  margin: 5px;
+  background-color: #E5DED2;
+  border-radius: 5px;
+  color: #191928;
+}
+.categories-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
+  margin: 20px auto;
+}
 
-margin:5px;
-background-color: #E5DED2;
-border-radius: 5px;
-color: #191928;
+.cat-btn {
+  margin: 0;
+  margin-top: 5px;
+  background: transparent;
+  color: #E5DED2;
+  border: 2px solid #C5A46D;
+  padding: 11px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
 
+.cat-btn:hover {
+  background: #E5DED2;
+  color: #131921;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(197, 164, 109, 0.25);
+}
 
+.cat-btn.active {
+  background: #C5A46D;
+  color: #131921;
+}
 
+.cat-btn.active {
+  background-color: #C5A46D;
+  color: #131921;
+  border-color: #C5A46D;
+}
+
+.cat-btn:active {
+  transform: scale(0.95);
+}
+
+.card-num {
+  display: table;
+  margin: 12px auto 30px;
+  padding: 12px 30px;
+  background-color: #191928;
+  color: #E5DED2;
+  border: 2px solid #C5A46D;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
 }

@@ -1,8 +1,25 @@
 
-import { FaStar, FaShoppingCart, FaTag } from "react-icons/fa";
+import {
+  FaStar,
+  FaShoppingCart,
+  FaTag,
+  FaPercent,
+  FaCheckCircle,
+  FaTimesCircle,
+} from "react-icons/fa";
+
 import "./ProductCard.css";
 
-function ProductCard({ thumbnail, title, price, rating }) {
+function ProductCard({
+  thumbnail,
+  title,
+  price,
+  rating,
+  discount,
+  availability,
+}) {
+  const isAvailable = availability === "In Stock";
+
   return (
     <div className="product-card">
       <div className="product-image">
@@ -21,7 +38,21 @@ function ProductCard({ thumbnail, title, price, rating }) {
           <FaTag /> {Number(price).toLocaleString("en-US")} EGP
         </p>
 
-        <button className="add-to-cart">
+        <p className="product-discount">
+          <FaPercent />
+          Discount: {discount ?? 0}%
+        </p>
+
+        <p
+          className={`product-availability ${
+            isAvailable ? "in-stock" : "out-of-stock"
+          }`}
+        >
+          {isAvailable ? <FaCheckCircle /> : <FaTimesCircle />}
+          {availability ?? "Unknown"}
+        </p>
+
+        <button className="add-to-cart" disabled={!isAvailable}>
           <FaShoppingCart /> أضف إلى السلة
         </button>
       </div>
