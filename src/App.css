@@ -137,6 +137,8 @@ body {
   background-color: #E5DED2;
   border-radius: 5px;
   color: #191928;
+  border-radius: 16px;
+    border: 2px solid black;
 }
 .categories-bar {
   display: flex;
